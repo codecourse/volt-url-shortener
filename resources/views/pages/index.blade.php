@@ -29,7 +29,26 @@ $clear = function () {
                 <div>
                     <p>Boom &mdash; your short link is ready!</p>
                     <div class="mt-2">
-                        <input type="text" readonly class="w-full rounded-lg border-slate-300 text-slate-800 h-14 px-5 text-lg placeholder:text-slate-400 focus:ring-2 focus:ring-blue-500" value="{{ $url->redirectUrl() }}">
+                        <div class="relative">
+                            <input type="text" readonly class="w-full rounded-lg border-slate-300 text-slate-800 h-14 px-5 text-lg placeholder:text-slate-400 focus:ring-2 focus:ring-blue-500" value="{{ $url->redirectUrl() }}">
+
+                            <button
+                                type="button"
+                                class="bg-blue-500 text-blue-50 rounded-lg px-6 h-10 font-medium absolute inset-y-2 right-2"
+                                x-data="{ url: '{{ $url->redirectUrl() }}', copied: false }"
+                                x-on:click="
+                                    $clipboard(url)
+                                    copied = true
+
+                                    setTimeout(() => {
+                                        copied = false
+                                    }, 2000)
+                                "
+                                x-text="copied ? 'Copied!' : 'Copy'"
+                            >
+                                Copy
+                            </button>
+                        </div>
                     </div>
                 </div>
             @else

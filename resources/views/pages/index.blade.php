@@ -14,7 +14,12 @@ $submit = function (HashIdGenerator $hashIdGenerator) {
     $this->url = Url::create($this->form->only('url') + [
         'hashid' => $hashIdGenerator->generate()
     ]);
-}
+};
+
+$clear = function () {
+    $this->form->reset();
+    $this->url = null;
+};
 ?>
 
 <x-app-layout>
@@ -32,7 +37,13 @@ $submit = function (HashIdGenerator $hashIdGenerator) {
             @endif
 
             <div class="flex items-baseline space-x-4">
-                <button type="submit" class="bg-blue-500 text-blue-50 rounded-lg px-10 mt-4 h-11 font-medium">Get short URL</button>
+                @if ($url)
+                    <button type="button" wire:click="clear" class="bg-blue-500 text-blue-50 rounded-lg px-10 mt-4 h-11 font-medium">
+                        Generate another short URL
+                    </button>
+                @else
+                    <button type="submit" class="bg-blue-500 text-blue-50 rounded-lg px-10 mt-4 h-11 font-medium">Get short URL</button>
+                @endif
 
                 @error('form.url')
                     <div>

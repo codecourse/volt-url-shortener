@@ -14,4 +14,9 @@ class Url extends Model
         'hashid',
         'visits'
     ];
+
+    public function redirectUrl()
+    {
+        return route('redirect', ['url' => $this]);
+    }
 }

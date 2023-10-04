@@ -24,7 +24,7 @@ $submit = function (HashIdGenerator $hashIdGenerator) {
                 <div>
                     <p>Boom &mdash; your short link is ready!</p>
                     <div class="mt-2">
-                        <input type="text" readonly class="w-full rounded-lg border-slate-300 text-slate-800 h-14 px-5 text-lg placeholder:text-slate-400 focus:ring-2 focus:ring-blue-500" value="{{ $url->id }}">
+                        <input type="text" readonly class="w-full rounded-lg border-slate-300 text-slate-800 h-14 px-5 text-lg placeholder:text-slate-400 focus:ring-2 focus:ring-blue-500" value="{{ $url->redirectUrl() }}">
                     </div>
                 </div>
             @else

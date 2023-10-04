@@ -2,16 +2,17 @@
 use function Livewire\Volt\{state, rules, form};
 use App\Livewire\Forms\UrlForm;
 use App\Models\Url;
+use App\Utility\HashIdGenerator;
 
 state('url');
 
 form(UrlForm::class);
 
-$submit = function () {
+$submit = function (HashIdGenerator $hashIdGenerator) {
     $this->form->validate();
 
     $this->url = Url::create($this->form->only('url') + [
-        'hashid' => 'abc'
+        'hashid' => $hashIdGenerator->generate()
     ]);
 }
 ?>
